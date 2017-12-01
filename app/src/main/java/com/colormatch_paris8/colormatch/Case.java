@@ -25,7 +25,7 @@ public class Case
             int listColor[] = {Color.BLUE, Color.GREEN, Color.GRAY, Color.MAGENTA, Color.YELLOW, Color.RED, Color.BLACK};
             int numberColor = listColor.length;
             Random randomIndice = new Random();
-            this.color = listColor[randomIndice.nextInt(numberColor)];
+            this.color = randomIndice.nextInt(numberColor);
             this.empty = false;
             this.size = size;
         }

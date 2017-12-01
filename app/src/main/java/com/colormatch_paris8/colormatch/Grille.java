@@ -26,10 +26,13 @@ public class Grille extends AppCompatActivity {
         Random random = new Random();
 
         //récupération de la taille d'une case en fonction de la taille de l'écran
+        /*
         Display display = getWindowManager().getDefaultDisplay();
         int screenWidth = display.getWidth();
         int screenWeight = display.getHeight();
         float caseSize = screenWidth / w;
+        */
+        float caseSize = 0;
 
         // Initialisation des cases vides
         for(int i=0 ; i<this.numberEmptyCase ; i++)
@@ -93,28 +96,109 @@ public class Grille extends AppCompatActivity {
             {
                 if (this.data[i][j].isClicked(click) == true)
                 {
-                    if(this.data[i][j].isEmpty() == true)
+                    if(this.data[i][j].isEmpty() == false)
                     {
                         //réduire la barre de temp
                         return -1;
                     }
                 }
             }
-
         }
         return 0;
     }
 
+    /*
+        Cette fonction récupère les voisins de la case passé en paramètre, si ils éxistent,  et stocks leurs positions
+        et leurs couleurs dans un tableau 2D
+    */
+    public void searchNeighbors(int caseI, int caseJ)
+    {
+        // couleur ; caseI ; caseJ
+        int[][] neighbors = {  {-1, -1, -1},
+                                {-1, -1, -1},
+                                {-1, -1, -1},
+                                {-1, -1, -1} };
+        int numberNeighbors = 0;
+
+
+        //Récupération du voisin de droite
+        for(int i=caseI+1 ; i<this.width ; i++)
+        {
+            if(this.data[i][caseJ].isEmpty() == false)
+            {
+                neighbors[numberNeighbors][0] = this.data[i][caseJ].getColor();
+                neighbors[numberNeighbors][1] = i;
+                neighbors[numberNeighbors][2] = caseJ;
+                numberNeighbors++;
+                break;
+            }
+        }
+
+        //Récupération du voisin de gauche
+        for(int i=caseI-1 ; i>=0 ; i--)
+        {
+            if(this.data[i][caseJ].isEmpty() == false)
+            {
+                neighbors[numberNeighbors][0] = this.data[i][caseJ].getColor();
+                neighbors[numberNeighbors][1] = i;
+                neighbors[numberNeighbors][2] = caseJ;
+                numberNeighbors++;
+                break;
+            }
+        }
+
+        //Récupération du voisin du haut
+        for(int j=caseJ-1 ; j>=0 ; j--)
+        {
+            if(this.data[caseI][j].isEmpty() == false)
+            {
+                neighbors[numberNeighbors][0] = this.data[caseI][j].getColor();
+                neighbors[numberNeighbors][1] = caseI;
+                neighbors[numberNeighbors][2] = j;
+                numberNeighbors++;
+                break;
+            }
+        }
+
+        //Récupération du voisin du bas
+        for(int j=caseJ+1 ; j<this.height ; j++)
+        {
+            if(this.data[caseI][j].isEmpty() == false)
+            {
+                neighbors[numberNeighbors][0] = this.data[caseI][j].getColor();
+                neighbors[numberNeighbors][1] = caseI;
+                neighbors[numberNeighbors][2] = j;
+                numberNeighbors++;
+                break;
+            }
+        }
+
+        System.out.println("case = " + caseI + " " + caseJ);
+        for(int i=0 ; i<numberNeighbors ; i++)
+            System.out.println(neighbors[i][0] + " " + neighbors[i][1] + " " + neighbors[i][2]);
+
+    }
+
+    //Fonction qui prend en paramètre le tableau de voisins, et analyse si des couleurs identiques s'y trouvent, si oui, il les détruits
+    void destroySameColors(int[][] neighbors, int numberNeighbors)
+    {
+        for(int i=0 ; i<numberNeighbors ; i++)
+        {
+
+        }
+    }
+
     // Fonction qui affiche les données de la grille dans la console
-    public void printColorData()
+    public void printDataColor()
     {
         for (int i = 0; i < this.height; i++)
         {
             for (int j = 0; j < this.width; j++)
-                //System.out.print(" %d ", this.data[i][j].getColor());
-
-                System.out.println("");
+                System.out.print(" " + this.data[i][j].getColor() + " ");
+            System.out.println("");
         }
+
+        searchNeighbors(3,3);
     }
 
 }

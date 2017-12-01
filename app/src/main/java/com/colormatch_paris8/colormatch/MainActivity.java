@@ -11,8 +11,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Création de la grille
-        Grille grille = new Grille(14,10);
-        grille.printData();
+        // Test Débugage
+        Grille grille = new Grille(10,14);
+        grille.printDataColor();
     }
 }
