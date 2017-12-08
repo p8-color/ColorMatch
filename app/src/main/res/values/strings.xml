@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Color Match</string>
+    <color  name="violet">#9400D3</color>
+    <color  name="indigo">#FF0000</color>
+    <color  name="blue">#00FFF0</color>
+    <color  name="green">#00FF00</color>
+    <color  name="yellow">#FFFF00</color>
+    <color  name="orange">#FFBF00</color>
+    <color  name="red">#F000FF</color>
+    <color  name="white">#FBBBB7</color>
 </resources>
